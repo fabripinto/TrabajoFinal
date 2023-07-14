@@ -1,0 +1,140 @@
+---
+title: "Duracion de baterias"
+author: "Fabricio Pinto"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Caso de estudio practico - Baterias de autoelevador
+
+Recuperacion de datos via Web.
+
+```{r}
+datos_75 <- c(1 , 19 , 0,
+2 , 18 , 0,
+3 , 22 , 0,
+4 , 25 , 0,
+5 , 17 , 0,
+6 , 30 , 0,
+7 , 29 , 0,
+8 , 32 , 0,
+9 , 31 , 0,
+10, 33 , 0,
+11, 38 , 0,
+12, 36 , 0,
+13, 40 , 1,
+14, 40 , 0,
+15, 42 , 0,
+16, 45 , 0,
+17, 47 , 0,
+18, 49 , 0,
+19, 55 , 0,
+20, 58 , 1,
+21, 57 , 1,
+22, 63 , 1,
+23, 65 , 1,
+24, 65 , 1,
+25, 66 , 1)
+Muestra_75 <- matrix(datos_75, ncol = 3, byrow = TRUE)
+Muestra_75
+```
+
+Para crear matrix
+Para convertir as.matrix
+Para verificar is.matrix
+
+Ejemplo para crear una matriz
+
+```{r}
+mimatriz <- matrix(1:25, nrow = 5, byrow = FALSE)
+mimatriz
+```
+
+Para crear matrces de texto hay una estructura que se llama Listas.
+
+```{r}
+milista <- list()
+milista[1] <- "Gasoil"
+milista[2] <- "Nafta"
+```
+
+Para encontrar la posicion del valor maximo o minimo usar which.max(Muestra_75[1:25], y el numero de columna).
+Con el resultado, usar Muestra_75 [Resultado, columna]
+
+```{r}
+plot(mimatriz[ ,1], mimatriz[ ,2], xlab = "Temperatura", ylab = "Tiempo")
+
+```
+
+
+## Graficos
+
+Para ver los principales graficos que se pueden hacer ejecutamos en la consola el comando $$demo(graphics)$$.
+
+Para hacer el grafico de matriz de correlacion ejecutamos el comando plot(mtcars).
+```{r}
+plot(mtcars)
+```
+
+```{r}
+hist(Muestra_75, col = "white", border = "red")
+```
+
+
+Calculo del promedio y el desvio standard de la duracion de las baterias Muestra_75
+
+mean(Muestra_75)
+```{r}
+mean(Muestra_75)
+```
+
+sd(Muestra_75)
+
+```{r}
+sd(Muestra_75)
+```
+
+
+```{r}
+Muestra_12 <- read_delim("Muestra_12.csv", 
+    delim = ";", escape_double = FALSE, col_types = cols(...1 = col_number(), 
+        x = col_number()), locale = locale(decimal_mark = ",", 
+        grouping_mark = "."), trim_ws = TRUE)
+```
+```{r}
+boxplot(Muestra_75[ ,2])
+```
+
+
+
+```{r}
+boxplot(Muestra_12$x)
+```
+
+El fabricante de las baterias garantizo por contrato una duracion media de carga de 18, con un desvio estandar de 3.5. Podriamos afirmar con un 86% de confianza que nuestras baterias se ajustan a esa especificacion? 
+
+Para un nivel de confianza del 93.7% y del 97.3% cuales serian los valores maximos y minimos que deberia alcanzar la cantidad de cargas?
+
+
+```{r}
+muestra <- rnorm(100, 18, 3.5)
+hist(muestra)
+```
+
+La funcion de densidad nos muestra el histograma como si tuviese infinitos breaks. 
+
+```{r}
+density(Muestra_75[ ,2])
+```
+
+```{r}
+plot(density(Muestra_75[ ,2]))
+```
+
+```{r}
+plot(density(muestra))
+```
